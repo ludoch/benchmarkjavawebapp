@@ -1,9 +1,9 @@
 benchmark-java-webapp
 =====================
 
-git clone https://github.com/GoogleCloudPlatform/benchmark-java-webapp.git
+git clone https://github.com/ludoch/benchmarkjavawebapp.git
 
-cd benchmark-java-webapp
+cd benchmarkjavawebapp
 
 cd webfragment
 
