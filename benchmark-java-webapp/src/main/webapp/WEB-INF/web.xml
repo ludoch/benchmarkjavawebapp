@@ -37,6 +37,10 @@
         <servlet-class>com.google.appengine.benchmark.webapp.Servlet2</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Servlet3</servlet-name>
+        <servlet-class>com.google.appengine.benchmark.webapp.Servlet3</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Servlet4</servlet-name>
         <servlet-class>com.google.appengine.benchmark.webapp.Servlet4</servlet-class>
     </servlet>
@@ -51,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>Servlet2</servlet-name>
         <url-pattern>/Servlet2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet3</servlet-name>
+        <url-pattern>/Servlet3</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Servlet4</servlet-name>
