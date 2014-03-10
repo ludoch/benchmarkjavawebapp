@@ -30,19 +30,18 @@
     </dependency>
     
     <dependency>
-      <groupId>org.apache.geronimo.specs</groupId>
-      <artifactId>geronimo-servlet_3.1_spec</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
       <scope>provided</scope>
-
     </dependency>
-        
+
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.27</version>
     </dependency>
-    
+
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-json</artifactId>
@@ -58,7 +57,7 @@
       <artifactId>jersey-servlet</artifactId>
       <version>1.17.1</version>
     </dependency>        
-              
+
     <dependency>
       <groupId>org.eclipse.persistence</groupId>
       <artifactId>eclipselink</artifactId>
@@ -80,7 +79,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-
             
     <!-- Required by Hibernate validator because slf4j-log4j is
     optional in the hibernate-validator POM -->
@@ -175,7 +173,7 @@
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.1.0.v20131115</version>
+        <version>9.1.QS-SNAPSHOT</version>
         <configuration>
           <contextPath>/</contextPath>
           <scanIntervalSeconds>1</scanIntervalSeconds>
@@ -195,5 +193,36 @@
       </plugin>           
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>precompile-jsp</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-jspc-maven-plugin</artifactId>
+            <version>9.1.QS-SNAPSHOT</version>
+            <executions>
+              <execution>
+                <id>jspc</id>
+                <goals>
+                  <goal>jspc</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+              <webXml>${basedir}/target/web.xml</webXml>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 
 </project>

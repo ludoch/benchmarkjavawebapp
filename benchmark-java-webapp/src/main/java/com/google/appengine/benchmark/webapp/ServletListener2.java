@@ -40,26 +40,21 @@ public class ServletListener2 implements ServletContextListener, ServletContextA
 
   @Override
   public void sessionCreated(HttpSessionEvent se) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
   @Override
   public void sessionDestroyed(HttpSessionEvent se) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
   @Override
   public void attributeAdded(HttpSessionBindingEvent event) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
   @Override
   public void attributeRemoved(HttpSessionBindingEvent event) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
   @Override
   public void attributeReplaced(HttpSessionBindingEvent event) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 }
