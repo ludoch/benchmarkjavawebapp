@@ -30,18 +30,19 @@
     </dependency>
     
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-servlet_3.1_spec</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <scope>provided</scope>
-    </dependency>
 
+    </dependency>
+        
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.27</version>
     </dependency>
-
+    
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-json</artifactId>
@@ -57,7 +58,7 @@
       <artifactId>jersey-servlet</artifactId>
       <version>1.17.1</version>
     </dependency>        
-
+              
     <dependency>
       <groupId>org.eclipse.persistence</groupId>
       <artifactId>eclipselink</artifactId>
@@ -79,6 +80,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+
             
     <!-- Required by Hibernate validator because slf4j-log4j is
     optional in the hibernate-validator POM -->
@@ -114,6 +116,18 @@
       <version>3.2.5.RELEASE</version>
     </dependency>  
 
+    <dependency>
+      <groupId>org.apache.taglibs</groupId>
+      <artifactId>taglibs-standard-impl</artifactId>
+      <version>1.2.1</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.appengine</groupId>
+      <artifactId>appengine-endpoints</artifactId>
+      <version>1.9.11</version>
+      <type>jar</type>
+    </dependency>
   </dependencies>
   
   
@@ -123,6 +137,8 @@
 
 
   <build>
+    <outputDirectory>target/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory> 
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -142,6 +158,7 @@
         <version>2.3</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
+          <webXml>${project.basedir}/target/web.xml</webXml>
         </configuration>
       </plugin>
       <plugin>
@@ -173,7 +190,7 @@
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.1.QS-SNAPSHOT</version>
+        <version>9.2.3.v20140905</version>
         <configuration>
           <contextPath>/</contextPath>
           <scanIntervalSeconds>1</scanIntervalSeconds>
@@ -182,47 +199,49 @@
 
       </plugin>
       <plugin>
+        <groupId>org.wildfly.plugins</groupId>
+        <artifactId>wildfly-maven-plugin</artifactId>
+        <version>1.0.2.Final</version>
+      </plugin>            
+                                   
+ 
+
+      <plugin>
         <groupId>com.google.appengine</groupId>
         <artifactId>appengine-maven-plugin</artifactId>
-        <version>1.8.8-maven3.0</version>
+        <version>1.9.12-SNAPSHOT</version>
         <configuration>
-                  
-          <fullScanSeconds>1</fullScanSeconds>
-          <server>preview.appengine.google.com</server>
+
+          <gcloud_directory>/Users/ludo/google-cloud-sdk</gcloud_directory>
+          <gcloud_app_docker_host>tcp://192.168.59.103:2375</gcloud_app_docker_host>
+  
+
+          <!--gcloud_verbosity>debug</gcloud_verbosity-->
+          <gcloud_app_api_host>192.168.1.129:51515</gcloud_app_api_host>
+          <!--gcloud_app_version>dockerversion</gcloud_app_version-->
+          <gcloud_app_server>preview.appengine.google.com</gcloud_app_server>
         </configuration>
-      </plugin>           
+      </plugin>
+            
+            
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-jspc-maven-plugin</artifactId>
+        <version>9.2.3.v20140905</version>
+        <executions>
+          <execution>
+            <id>jspc</id>
+            <goals>
+              <goal>jspc</goal>
+            </goals>
+            <configuration>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>precompile-jsp</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-jspc-maven-plugin</artifactId>
-            <version>9.1.QS-SNAPSHOT</version>
-            <executions>
-              <execution>
-                <id>jspc</id>
-                <goals>
-                  <goal>jspc</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <configuration>
-              <webXml>${basedir}/target/web.xml</webXml>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 
 
 </project>
